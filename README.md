@@ -6,8 +6,10 @@
 
 ```js
 // First of all, add scripts for Analytics and/or Intercom on your code.
-// Then, configure some tracker (or trackers):
+// Then, import universal event tracker:
 const eventTracker = require('universal-event-tracker');
+
+// Then, configure some tracker (or trackers):
 const intercomTracker = eventTracker.intercom({
 	appId: '123', // required
 	name: 'John Doe', // optional
