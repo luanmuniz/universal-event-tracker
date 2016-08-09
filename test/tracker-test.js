@@ -28,11 +28,15 @@ test('Test trackers', (assert) => {
 		email: 'john@doe.com'
 	});
 
+	gaTracker.createEvent('eventError');
+
 	eventTracker.createEvent('store_purchase', {
-		price: 10,
-		name: 'Product Name',
+		action: 'click',
+		value: 10,
+		label: 'Product Name',
 		url: 'http://www.url.com'
 	});
+
 	expect(gaTracker).to.have.property('createEvent');
 	expect(intercomTracker).to.have.all.keys('createEvent', 'update');
 	expect(eventTracker).to.have.property('createEvent');
