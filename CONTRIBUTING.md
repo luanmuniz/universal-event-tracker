@@ -23,3 +23,19 @@ And please:
 If you fixed or added something useful to the project, you can send pull-request. It will be reviewed by maintainer and accepted, or commented for rework, or declined. If you a new and don't know what you should do to send a PR, please see [this tutorial](https://gist.github.com/luanmuniz/da0b8d2152c4877f93c4)
 
 Before sending you Pull Request please don't forget to check your code with `npm test`. PR that don't pass tests will not be accept
+
+## Scripts
+
+### Development
+
+- `npm run test:watch` - Run tests and watch all files
+
+### Run once
+
+- `npm run lint` - Check for lint errors on all files
+- `npm run lint:fix` - Fix lint errors
+- `npm test` - Run unit tests
+
+### Deploy
+
+- `npm version <version>` - Update project version
