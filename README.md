@@ -5,7 +5,8 @@
 ## Usage
 
 ```js
-// First of all, configure some tracker (or trackers):
+// First of all, add scripts for Analytics and/or Intercom on your code.
+// Then, configure some tracker (or trackers):
 const eventTracker = require('universal-event-tracker');
 const intercomTracker = eventTracker.intercom({
 	appId: '123', // required
@@ -21,7 +22,6 @@ intercomTracker.update({
 	name: 'John Doe',
 	email: 'John Doe'
 });
-
 
 // You may configure another trackers:
 const gaTracker = eventTracker.ga({ /* config */ })
