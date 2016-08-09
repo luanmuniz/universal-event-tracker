@@ -2,5 +2,6 @@
 
 ## Available trackers
 
-- [Intercom (client and server side)](intercom.md)
-- [Google Analytics (client side)](ga.md)
+Just client side               | Just server side | Both (client and server)
+------------------------------ | ---------------- | ------------------------
+[Google Analytics](ga.md)      |                  | [Intercom](intercom.md)
