@@ -29,6 +29,13 @@ const gaTracker = eventTracker.ga({ /* config */ })
 // And, for using all trackers at the same time, just do it:
 const tracker = eventTracker(intercomTracker, gaTracker);
 tracker.createEvent('eventName', { /* some data */ });
+
+// Specific options for Google Analytics, but can be used for others:
+gaTracker.createEvent('eventName', { // eventName is "category"
+	action: 'click', // or another action
+	label: 'Product name',
+	value: 100
+});
 ```
 
 ## Scripts
