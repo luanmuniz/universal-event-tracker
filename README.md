@@ -1,4 +1,4 @@
-# universal-event-tracker
+# Universal Event Tracker
 
 > A universal event tracker for analytcs
 
