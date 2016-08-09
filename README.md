@@ -13,8 +13,9 @@
 // Then, import universal event tracker:
 const eventTracker = require('universal-event-tracker');
 
-// Then, configure some tracker (or trackers):
-const intercomTracker = eventTracker.intercom({
+// Then, import and configure some tracker (or trackers):
+const intercom = require('universal-event-tracker/trackers/intercom');
+const intercomTracker = intercom({
 	appId: '123', // required
 	name: 'John Doe', // optional
 	email: 'john@doe.com' // optional
@@ -30,7 +31,7 @@ intercomTracker.update({
 });
 
 // You may configure another trackers:
-const gaTracker = eventTracker.ga({ /* config */ })
+const gaTracker = require('universal-event-tracker/trackers/ga')();
 
 // And, for using all trackers at the same time, just do it:
 const tracker = eventTracker(intercomTracker, gaTracker);
@@ -44,21 +45,13 @@ gaTracker.createEvent('eventName', { // eventName is "category"
 });
 ```
 
-## Scripts
+## Available trackers and documentation
 
-### Development
+[Click here](docs/README.md) to check the docs for all trackers.
 
-- `npm run test:watch` - Run tests and watch all files
+## Contributing
 
-### Run once
-
-- `npm run lint` - Check for lint errors on all files
-- `npm run lint:fix` - Fix lint errors
-- `npm test` - Run unit tests
-
-### Deploy
-
-- `npm version <version>` - Update project version
+Please, check the [Contributing documentation](CONTRIBUTING.md), there're just a few steps.
 
 ## License
 
