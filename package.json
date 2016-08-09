@@ -7,16 +7,16 @@
     "test": "test"
   },
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "scripts": {
-    "lint": "eslint lib test",
-    "lint:fix": "eslint lib test --fix",
+    "lint": "eslint lib trackers test",
+    "lint:fix": "eslint lib trackers test --fix",
     "david": "david",
     "test:once": "tape 'test/**/*.js' | tap-spec",
     "cover": "nyc npm run test:once",
     "test": "npm run lint && npm run david && npm run cover",
-    "test:watch": "watch 'npm run lint && npm run cover' lib test",
+    "test:watch": "watch 'npm run lint && npm run cover' lib trackers test",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
     "preversion": "rm -rf ./node_modules/ && npm install && npm test",
     "postversion": "git push && npm publish && git push --tags"
@@ -29,7 +29,10 @@
     "check-coverage": true,
     "all": true,
     "cache": true,
-    "include": ["lib"],
+    "include": [
+      "lib",
+      "trackers"
+    ],
     "reporter": [
       "text",
       "html",
@@ -64,5 +67,7 @@
     "tape": "^4.6.0",
     "watch": "^0.19.1"
   },
-  "dependencies": {}
+  "dependencies": {
+    "intercom.io": "^1.2.1"
+  }
 }
