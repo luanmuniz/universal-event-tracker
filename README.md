@@ -4,8 +4,6 @@
 
 [![Build Status][travis-image]][travis-url]
 [![Coveralls Coverage Status][coverage-image]][coverage-url]
-[![Code Climate Coverage][codeclimate-coverage-image]][codeclimate-coverage-url]
-[![Code Climate][codeclimate-image]][codeclimate-url]
 [![License][license-image]][license-url]
 
 ## Usage
@@ -70,9 +68,5 @@ gaTracker.createEvent('eventName', { // eventName is "category"
 [travis-url]: https://travis-ci.org/ZimpFidelidade/universal-event-tracker
 [coverage-image]: https://img.shields.io/coveralls/ZimpFidelidade/universal-event-tracker/master.svg?style=flat-square
 [coverage-url]: https://coveralls.io/r/ZimpFidelidade/universal-event-tracker?branch=master
-[codeclimate-coverage-image]: https://img.shields.io/codeclimate/coverage/github/ZimpFidelidade/universal-event-tracker.svg?style=flat-square
-[codeclimate-coverage-url]: https://codeclimate.com/github/ZimpFidelidade/universal-event-tracker
-[codeclimate-image]: https://img.shields.io/codeclimate/github/ZimpFidelidade/universal-event-tracker.svg?style=flat-square
-[codeclimate-url]: https://codeclimate.com/github/ZimpFidelidade/universal-event-tracker
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: https://zimp.mit-license.org/
