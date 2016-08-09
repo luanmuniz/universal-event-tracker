@@ -4,7 +4,7 @@ const { Maybe, isClientSide } = require('../lib/utils');
 
 // Google Analytics Tracker
 
-module.exports = (config) => {
+module.exports = () => {
 	const gaTracker = {};
 	const ga = (() => {
 		let GA = () => '';

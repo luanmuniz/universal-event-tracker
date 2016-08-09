@@ -30,11 +30,6 @@ test('Test trackers', (assert) => {
 	const gaTracker = ga();
 	const eventTracker = tracker(intercomTracker, gaTracker);
 
-	console.log('\n\n\ngaTracker', gaTracker);
-	console.log('\n\n\nintercomTracker', intercomTracker);
-	console.log('\n\n\nintercomServer', intercomTrackerServer);
-	console.log('\n\n\neventTracker', eventTracker);
-
 	intercomTracker.update({
 		name: 'John Doe',
 		email: 'john@doe.com'

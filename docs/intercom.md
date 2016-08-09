@@ -1,11 +1,5 @@
 # Intercom tracker
 
-Import the universal event tracker:
-
-```js
-const eventTracker = require('universal-event-tracker');
-```
-
 ### Client side
 
 Import the intercom tracker:
@@ -18,9 +12,21 @@ Configure the tracker:
 
 ```js
 const intercomTracker = intercom({
-	appId: '123'
+	appId: '123', // required
+	name: 'John Doe', // optional
+	email: 'john@doe.com' // optional
 });
 ```
+
+If user is logged in, you can update tracker:
+
+```js
+intercomTracker.update({
+	name: 'John Doe',
+	email: 'john@doe.com'
+});
+```
+
 
 ### Server side
 
@@ -42,6 +48,8 @@ const intercomTracker = intercom({
 });
 ```
 
+On server side, `intercomTracker` has an property `intercomTracker.intercomIO`, that returns all methods for [`intercom.io` package](https://github.com/tarunc/intercom.io) instance.
+
 ## Usage
 
 Create event just for intercom:
@@ -56,8 +64,13 @@ intercomTracker.createEvent('eventName', {
 Create event for all trackers:
 
 ```js
+// Import the universal event tracker:
+const eventTracker = require('universal-event-tracker');
+
+// Configure usage for trackers
 const tracker = eventTracker(intercomTracker, <otherTracker>);
 
+// Use `createEvent` method
 tracker.createEvent('eventName', {
 	label: 'Product Name',
 	value: 100
