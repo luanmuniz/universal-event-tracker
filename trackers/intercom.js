@@ -1,6 +1,6 @@
 'use strict';
 
-const { Maybe, isClientSide } = require('../utils');
+const { Maybe, isClientSide } = require('../lib/utils');
 
 module.exports = (config) => {
 	const intercomTracker = {};
