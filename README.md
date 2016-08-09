@@ -7,7 +7,6 @@
 [![Code Climate Coverage][codeclimate-coverage-image]][codeclimate-coverage-url]
 [![Code Climate][codeclimate-image]][codeclimate-url]
 [![License][license-image]][license-url]
-[![CONTRIBUTING][contributing-image]][contributing-url]
 
 ## Usage
 
