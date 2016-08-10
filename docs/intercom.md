@@ -41,10 +41,17 @@ Configure the tracker:
 ```js
 const intercomTracker = intercom({
 	appId: '123', // required
-	apiKey: '456', // required
-	name: 'John Doe', // optional
-	email: 'john@doe.com', // optional
-	userId: '0123', // optional
+	apiKey: '456' // required
+});
+```
+
+Create some user:
+
+```js
+intercomTracker.createUser({
+	userId: '123', // required if no email is supplied
+	email: 'john@doe.com', // required if no userId is supplied
+	name: 'John Doe' // optional
 });
 ```
 
@@ -56,8 +63,12 @@ Create event just for intercom:
 
 ```js
 intercomTracker.createEvent('eventName', {
-	label: 'Product Name',
-	value: 100
+	email: 'john@doe.com',
+	userId: '123',
+	metadata: {
+		label: 'Product Name',
+		value: 100
+	}
 });
 ```
 
@@ -72,7 +83,14 @@ const tracker = eventTracker(intercomTracker, <otherTracker>);
 
 // Use `createEvent` method
 tracker.createEvent('eventName', {
-	label: 'Product Name',
-	value: 100
+	email: 'john@doe.com',
+	userId: '123',
+	metadata: {
+		label: 'Product Name',
+		value: 100
+	}
 });
 ```
+
+**Note:** If you are sending event for the same user created with `createUser` method, `userId` and `email` are both optional.
+But, if you can send an event for another user, and the user is already created, you can pass `email` or `userId` inside `createEvent` method.
