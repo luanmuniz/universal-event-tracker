@@ -1,19 +1,42 @@
 'use strict';
 
 const Intercom = require('intercom.io');
-const { Maybe } = require('../../lib/utils');
+const { Maybe, mapKeys, intercomCreatedAt } = require('../../lib/utils');
 
 module.exports = (config) => {
+	let userInfo;
 	const intercomTracker = {};
 	const intercom = new Intercom(config.appId, config.apiKey);
 
-	intercomTracker.createEvent = (eventName, eventData) => {
-		return intercom.createEvent(Object.assign({}, eventData, {
-			userId: Maybe(config.userId),
-			name: Maybe(config.name),
-			email: Maybe(config.email),
-			event_name: eventName
-		}));
+	const userKeys = {
+		userId: 'user_id',
+		email: 'email',
+		name: 'name'
+	};
+
+	intercomTracker.createUser = (userData) => {
+		userInfo = mapKeys(userKeys, userData);
+		return intercom.createUser(userInfo);
+	};
+
+	intercomTracker.createEvent = (eventName, eventData = {}) => {
+		let userData = userInfo;
+
+		if(eventData.userId || eventData.email) {
+			userData = mapKeys(userKeys, eventData);
+		}
+
+		if(!userData) {
+			return Promise.reject('You just need to pass a valid email or userId');
+		}
+
+		return intercom.createEvent(
+			Object.assign({}, userData, {
+				event_name: eventName,
+				created_at: intercomCreatedAt(),
+				metadata: eventData.metadata
+			})
+		);
 	};
 
 	intercomTracker.IntercomIO = intercom;
