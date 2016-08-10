@@ -90,6 +90,32 @@ test('GA Tracker (client side) test', (assert) => {
 	const gaTracker = ga();
 
 	gaTracker.createEvent('eventError');
+
+	gaTracker.createEvent('eventError', {
+		action: 'click'
+	});
+
+	gaTracker.createEvent('eventError', {
+		action: 'click',
+		metadata: {
+			label: 'Any label'
+		}
+	});
+
+	gaTracker.createEvent('eventError', {
+		action: 'click',
+		metadata: {
+			value: 'Any value'
+		}
+	});
+
+	gaTracker.createEvent('eventError', {
+		action: 'click',
+		metadata: {
+			url: 'http://sales.com'
+		}
+	});
+
 	expect(gaTracker).to.have.property('createEvent');
 	assert.end();
 });
@@ -103,9 +129,11 @@ test('All trackers (client side)', (assert) => {
 
 	eventTracker.createEvent('store_purchase', {
 		action: 'click',
-		value: 10,
-		label: 'Product Name',
-		url: 'http://www.url.com'
+		metadata: {
+			value: 10,
+			label: 'Product Name',
+			url: 'http://www.url.com'
+		}
 	});
 
 	expect(eventTracker).to.have.property('createEvent');
