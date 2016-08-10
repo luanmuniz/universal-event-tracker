@@ -16,13 +16,15 @@ const gaTracker = require('universal-event-tracker/trackers/ga')();
 
 ## Usage
 
-Create event just for Google Analytics:
+Create event just for Google Analytics (all params - `eventName`, `action`, `metadata.label` and `metadata.value` - are required):
 
 ```js
 gaTracker.createEvent('eventName', { // eventName is "category"
 	action: 'click', // or another action
-	label: 'Product name',
-	value: 100
+	metadata: {
+		label: 'Product name',
+		value: 100
+	}
 });
 ```
 
@@ -38,7 +40,10 @@ const tracker = eventTracker(gaTracker, <otherTracker>);
 // Use `createEvent` method
 tracker.createEvent('eventName', {
 	action: 'click',
-	label: 'Product Name',
-	value: 100
+	metadata: {
+		label: 'Product Name',
+		value: 100,
+		url: 'http://sales.com'
+	}
 });
 ```
