@@ -1,10 +1,9 @@
 'use strict';
 
-const { Maybe, isClientSide } = require('../lib/utils');
+const { Maybe, isClientSide, intercomCreatedAt } = require('../lib/utils');
 
 module.exports = (config) => {
 	const intercomTracker = {};
-	const now = () => Math.round((new Date()).getTime() / 1000);
 	const intercomMapKeys = (options) => {
 		const keys = {
 			appId: 'app_id',
@@ -15,7 +14,7 @@ module.exports = (config) => {
 		return Object.keys(keys).reduce((object, key) => {
 			object[keys[key]] = options[key];
 			return object;
-		}, { created_at: now() });
+		}, { created_at: intercomCreatedAt() });
 	};
 
 	const Intercom = (() => {
