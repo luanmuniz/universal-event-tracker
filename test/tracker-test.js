@@ -8,6 +8,7 @@ const ga = require('../trackers/ga');
 
 const intercomServer = require('../trackers/server/intercom');
 const config = require('./helpers/config');
+const { intercomCreatedAt } = require('../lib/utils');
 
 test('Test tracker method', (assert) => {
 	expect(tracker).to.be.a('function');
@@ -17,25 +18,88 @@ test('Test tracker method', (assert) => {
 	assert.end();
 });
 
-test('Test trackers', (assert) => {
-	const intercomTracker = intercom({
-		appId: config.appId
-	});
-
+test('Throw error if call createEvent and dont create an user before', (assert) => {
 	const intercomTrackerServer = intercomServer({
 		appId: config.appId,
 		apiKey: config.apiKey
 	});
 
-	const gaTracker = ga();
-	const eventTracker = tracker(intercomTracker, gaTracker);
+	intercomTrackerServer.createEvent('rejectedEvent').catch((errorResult) => {
+		expect(errorResult).to.be.equal('You just need to pass a valid email or userId');
+		assert.end();
+	});
+});
+
+test('Create user and send event', (assert) => {
+	const intercomTrackerServer = intercomServer({
+		appId: config.appId,
+		apiKey: config.apiKey
+	});
+
+	intercomTrackerServer.createUser({
+		userId: '393039',
+		email: 'john@doe.com',
+		name: 'John Doe'
+	});
+
+	intercomTrackerServer.createEvent(`testEvent - ${intercomCreatedAt()}`, {
+		email: 'john@doe.com',
+		metadata: {
+			name: 'just john doe'
+		}
+	});
+
+	intercomTrackerServer.createUser({
+		userId: '291029',
+		email: 'senado@lheira.com',
+		name: 'Senado Federal'
+	});
+
+	intercomTrackerServer.createEvent(`testEvent - ${intercomCreatedAt()}`, {
+		email: 'john@doe.com',
+		metadata: {
+			name: 'just john doe'
+		}
+	});
+
+	intercomTrackerServer.createEvent(`test - ${intercomCreatedAt()}`, {
+		metadata: {
+			eventFor: 'last created user'
+		}
+	});
+
+	expect(intercomTrackerServer).to.have.any.keys('createEvent', 'createUser');
+	assert.end();
+});
+
+test('Intercom tracker (client side) test', (assert) => {
+	const intercomTracker = intercom({
+		appId: config.appId
+	});
 
 	intercomTracker.update({
 		name: 'John Doe',
 		email: 'john@doe.com'
 	});
 
+	expect(intercomTracker).to.have.all.keys('createEvent', 'update');
+	assert.end();
+});
+
+test('GA Tracker (client side) test', (assert) => {
+	const gaTracker = ga();
+
 	gaTracker.createEvent('eventError');
+	expect(gaTracker).to.have.property('createEvent');
+	assert.end();
+});
+
+test('All trackers (client side)', (assert) => {
+	const intercomTracker = intercom({
+		appId: config.appId
+	});
+	const gaTracker = ga();
+	const eventTracker = tracker(intercomTracker, gaTracker);
 
 	eventTracker.createEvent('store_purchase', {
 		action: 'click',
@@ -44,15 +108,6 @@ test('Test trackers', (assert) => {
 		url: 'http://www.url.com'
 	});
 
-	intercomTrackerServer.createEvent('testEvent', {
-		action: 'someAction',
-		value: 10,
-		label: 'Product Name',
-		url: 'http://www.url.com'
-	});
-
-	expect(gaTracker).to.have.property('createEvent');
-	expect(intercomTracker).to.have.all.keys('createEvent', 'update');
 	expect(eventTracker).to.have.property('createEvent');
 	assert.end();
 });
