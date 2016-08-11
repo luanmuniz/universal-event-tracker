@@ -10,7 +10,7 @@ module.exports = () => {
 		let GA = () => '';
 
 		/* istanbul ignore if */
-		if(isClientSide) {
+		if(isClientSide()) {
 			GA = window.ga;
 			window.ga = undefined;
 		}

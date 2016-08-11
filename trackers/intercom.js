@@ -21,7 +21,7 @@ module.exports = (config) => {
 		let ic = () => '';
 
 		/* istanbul ignore if */
-		if(isClientSide) {
+		if(isClientSide()) {
 			ic = window.Intercom;
 			window.Intercom = undefined;
 		}
