@@ -23,7 +23,6 @@ module.exports = (config) => {
 		/* istanbul ignore if */
 		if(isClientSide()) {
 			ic = window.Intercom;
-			window.Intercom = undefined;
 		}
 
 		return ic;
@@ -38,6 +37,11 @@ module.exports = (config) => {
 
 	intercomTracker.createEvent = (eventName, eventData) => {
 		Intercom('createEvent', eventName, eventData);
+		return intercomTracker;
+	};
+
+	intercomTracker.shutdown = () => {
+		Intercom('shutdown');
 		return intercomTracker;
 	};
 

@@ -82,7 +82,9 @@ test('Intercom tracker (client side) test', (assert) => {
 		email: 'john@doe.com'
 	});
 
-	expect(intercomTracker).to.have.all.keys('createEvent', 'update');
+	intercomTracker.shutdown();
+
+	expect(intercomTracker).to.have.all.keys('createEvent', 'update', 'shutdown');
 	assert.end();
 });
 

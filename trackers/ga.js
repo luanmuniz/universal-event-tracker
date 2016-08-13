@@ -12,9 +12,7 @@ module.exports = () => {
 		/* istanbul ignore if */
 		if(isClientSide()) {
 			GA = window.ga;
-			window.ga = undefined;
 		}
-
 		return GA;
 	})();
 
