@@ -6,6 +6,14 @@
 [![Coveralls Coverage Status][coverage-image]][coverage-url]
 [![License][license-image]][license-url]
 
+## Installation
+
+```console
+npm install --save universal-event-tracker
+```
+
+**This module requires Node.js v6+**
+
 ## Usage
 
 [Click here](docs/README.md) to check the docs and all available trackers.
