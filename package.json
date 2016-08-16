@@ -1,6 +1,6 @@
 {
   "name": "universal-event-tracker",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A universal event tracker for analytcs",
   "main": "index.js",
   "directories": {
@@ -39,10 +39,6 @@
       "lcov"
     ]
   },
-  "pre-commit": [
-    "precommit-msg",
-    "test"
-  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ZimpFidelidade/universal-event-tracker.git"
