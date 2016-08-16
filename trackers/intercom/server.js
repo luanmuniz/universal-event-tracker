@@ -22,16 +22,13 @@ module.exports = (config) => {
 	intercomTracker.createEvent = (eventName, eventData = {}) => {
 		let userData = userInfo;
 
-		if(eventData.userId || eventData.email) {
-			userData = mapKeys(userKeys, eventData);
-		}
-
-		if(!userData) {
-			return Promise.reject('You just need to pass a valid email or userId');
-		}
-
+		console.log('intercom server create event', eventData, config);
 		return intercom.createEvent(
 			Object.assign({}, userData, {
+				email: config.email,
+				name: config.name,
+				user_hash: config.userHash,
+				user_id: config.userId,
 				event_name: eventName,
 				created_at: intercomCreatedAt(),
 				metadata: eventData.metadata
