@@ -5,6 +5,7 @@ const expect = require('chai').expect;
 const tracker = require('../lib/index');
 const intercom = require('../trackers/intercom');
 const ga = require('../trackers/ga');
+const gtm = require('../trackers/gtm');
 
 const intercomServer = require('../trackers/server/intercom');
 const config = require('./helpers/config');
@@ -127,12 +128,27 @@ test('GA Tracker (client side) test', (assert) => {
 	assert.end();
 });
 
+test('GTM Tracker (client side)', (assert) => {
+	const gtmTracker = gtm();
+
+	gtmTracker
+		.createEvent('event-test')
+		.createEvent('another-event', {
+			method: 'facebook',
+			'validation-error': 'Not authorized'
+		});
+
+	expect(gtmTracker).to.have.property('createEvent');
+	assert.end();
+});
+
 test('All trackers (client side)', (assert) => {
 	const intercomTracker = intercom({
 		appId: config.appId
 	});
 	const gaTracker = ga();
-	const eventTracker = tracker(intercomTracker, gaTracker);
+	const gtmTracker = gtm();
+	const eventTracker = tracker(intercomTracker, gaTracker, gtmTracker);
 
 	eventTracker.createEvent('store_purchase', {
 		action: 'click',
@@ -140,7 +156,9 @@ test('All trackers (client side)', (assert) => {
 			value: 10,
 			label: 'Product Name',
 			url: 'http://www.url.com'
-		}
+		},
+		method: 'facebook',
+		'validation-error': 'Not authorized'
 	});
 
 	expect(eventTracker).to.have.property('createEvent');
