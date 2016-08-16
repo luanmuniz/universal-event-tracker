@@ -77,9 +77,14 @@ test('Intercom tracker (client side) test', (assert) => {
 		appId: config.appId
 	});
 
+	// logged-out user
+	intercomTracker.update();
+
+	// logged-in user
 	intercomTracker.update({
 		name: 'John Doe',
-		email: 'john@doe.com'
+		email: 'john@doe.com',
+		userId: 'anonymous'
 	});
 
 	intercomTracker.shutdown();
