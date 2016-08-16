@@ -8,13 +8,30 @@ module.exports = (config) => {
 		const keys = {
 			appId: 'app_id',
 			name: 'name',
-			email: 'email'
+			email: 'email',
+			userId: 'user_id'
 		};
 
+		options = options || {};
+
+		if(!options.email) {
+			options.userId = 'anonymous';
+		}
+
+		if(options.email && options.userId === 'anonymous') {
+			options.userId = null;
+		}
+
+		const initialObject = options.email ? { created_at: intercomCreatedAt() } : {};
+
 		return Object.keys(keys).reduce((object, key) => {
-			object[keys[key]] = options[key];
+			const value = options[key] || (key !== 'userId' && config[key]);
+
+			if(value) {
+				object[keys[key]] = value;
+			}
 			return object;
-		}, { created_at: intercomCreatedAt() });
+		}, initialObject);
 	};
 
 	const Intercom = (() => {
@@ -31,7 +48,7 @@ module.exports = (config) => {
 	Intercom('boot', Maybe(intercomMapKeys(config)));
 
 	intercomTracker.update = (options) => {
-		Intercom('update', Maybe(options));
+		Intercom('update', Maybe(intercomMapKeys(options)));
 		return intercomTracker;
 	};
 
