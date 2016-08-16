@@ -1,6 +1,6 @@
 {
   "name": "universal-event-tracker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A universal event tracker for analytcs",
   "main": "index.js",
   "directories": {
