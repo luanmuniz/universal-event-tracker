@@ -3,11 +3,11 @@
 const test = require('tape');
 const expect = require('chai').expect;
 const tracker = require('../lib/index');
-const intercom = require('../trackers/intercom');
+const intercom = require('../trackers/intercom/client');
 const ga = require('../trackers/ga');
 const gtm = require('../trackers/gtm');
 
-const intercomServer = require('../trackers/server/intercom');
+const intercomServer = require('../trackers/intercom/server');
 const config = require('./helpers/config');
 const { intercomCreatedAt } = require('../lib/utils');
 
