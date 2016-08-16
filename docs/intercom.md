@@ -14,7 +14,8 @@ Configure the tracker:
 const intercomTracker = intercom({
 	appId: '123', // required
 	name: 'John Doe', // optional
-	email: 'john@doe.com' // optional
+	email: 'john@doe.com', // optional
+	userId: 'abc' // optional
 });
 ```
 
@@ -23,7 +24,8 @@ If user is logged in, you can update tracker:
 ```js
 intercomTracker.update({
 	name: 'John Doe',
-	email: 'john@doe.com'
+	email: 'john@doe.com', // required, if no userId is supplied
+	userId: 'abc' // required, if no email is supplied
 });
 ```
 
