@@ -22,7 +22,6 @@ module.exports = (config) => {
 	intercomTracker.createEvent = (eventName, eventData = {}) => {
 		let userData = userInfo;
 
-		console.log('intercom server create event', eventData, config);
 		return intercom.createEvent(
 			Object.assign({}, userData, {
 				email: config.email,

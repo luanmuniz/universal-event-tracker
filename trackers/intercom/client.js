@@ -1,6 +1,6 @@
 'use strict';
 
-const { Maybe, isClientSide, intercomCreatedAt } = require('../../lib/utils');
+const { isClientSide, intercomCreatedAt } = require('../../lib/utils');
 const intercomScript = require('./script');
 
 module.exports = (config) => {
@@ -16,14 +16,6 @@ module.exports = (config) => {
 		};
 
 		options = options || {};
-
-		// if(!options.email) {
-		// 	options.userId = 'anonymous';
-		// }
-
-		// if(options.email && options.userId === 'anonymous') {
-		// 	options.userId = null;
-		// }
 
 		const initialObject = options.email && !options.createdAt ? {
 			created_at: intercomCreatedAt()
@@ -44,7 +36,7 @@ module.exports = (config) => {
 	}
 
 	intercomTracker.boot = (options) => {
-		window.Intercom('boot', Object.assign({}, Maybe(intercomMapKeys(options)), {
+		window.Intercom('boot', Object.assign({}, intercomMapKeys(options), {
 			app_id: config.appId
 		}));
 		return intercomTracker;
@@ -55,13 +47,11 @@ module.exports = (config) => {
 	}
 
 	intercomTracker.update = (options) => {
-		console.log('update intercom', Maybe(intercomMapKeys(options)));
-		window.Intercom('update', Maybe(intercomMapKeys(options)));
+		window.Intercom('update', intercomMapKeys(options));
 		return intercomTracker;
 	};
 
 	intercomTracker.createEvent = (eventName, eventData) => {
-		console.log('intercom create event', eventData);
 		window.Intercom('trackEvent', eventName, eventData);
 		return intercomTracker;
 	};
