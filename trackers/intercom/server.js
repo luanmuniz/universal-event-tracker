@@ -1,7 +1,10 @@
 'use strict';
 
 const Intercom = require('intercom.io');
-const { Maybe, mapKeys, intercomCreatedAt } = require('../../lib/utils');
+const utils = require('../../lib/utils');
+const Maybe = utils.Maybe;
+const mapKeys = utils.mapKeys;
+const intercomCreatedAt = utils.intercomCreatedAt;
 
 module.exports = (config) => {
 	let userInfo;
