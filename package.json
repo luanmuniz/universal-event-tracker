@@ -19,7 +19,7 @@
     "test": "echo 1",
     "test:watch": "watch 'npm run lint && npm run cover' lib trackers test",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0",
-    "build": "babel . -d dist --ignore=node_modules,coverage,docs,test",
+    "build": "babel . -d dist --ignore=node_modules,coverage,docs,test,dist",
     "preversion": "npm test && npm run build",
     "postversion": "git push upstream master && npm publish && git push upstream master --tags"
   },
