@@ -22,8 +22,9 @@ module.exports = (config) => {
 		return intercom.createUser(userInfo);
 	};
 
-	intercomTracker.createEvent = (eventName, eventData = {}) => {
+	intercomTracker.createEvent = (eventName, eventData) => {
 		let userData = userInfo;
+		eventData = eventData || {};
 
 		return intercom.createEvent(
 			Object.assign({}, userData, {
