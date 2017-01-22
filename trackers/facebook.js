@@ -37,7 +37,7 @@ module.exports = () => {
 
 		/* istanbul ignore if */
 		if(isClientSide()) {
-			fbq = window.fbq;
+			fbq = window.fbq || fbq;
 		}
 		return fbq;
 	})();
