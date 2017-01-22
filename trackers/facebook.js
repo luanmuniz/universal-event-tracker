@@ -3,7 +3,17 @@
 const { Maybe, isClientSide, is } = require('../lib/utils');
 
 const isValidEvent = (eventName) => {
-	const events = ['ViewContent', 'Search', 'AddToCart', 'AddToWishlist', 'InitiateCheckout', 'AddPaymentInfo', 'Purchase', 'Lead', 'CompleteRegistration'];
+	const events = [
+		'ViewContent',
+		'Search',
+		'AddToCart',
+		'AddToWishlist',
+		'InitiateCheckout',
+		'AddPaymentInfo',
+		'Purchase',
+		'Lead',
+		'CompleteRegistration'
+	];
 	return events.find((e) => e === eventName);
 };
 
@@ -43,7 +53,7 @@ module.exports = () => {
 	facebookTracker.createEvent = (eventName, eventData) => {
 		if(isValidEvent(eventName) && areAllFieldsOk(eventData)) {
 			const metadata = getMetaData(eventData.metadata);
-			fbq('track', eventName, metadata);
+			facebook('track', eventName, metadata);
 		}
 
 		return facebookTracker;
